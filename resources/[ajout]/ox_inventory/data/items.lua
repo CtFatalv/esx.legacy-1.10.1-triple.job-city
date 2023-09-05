@@ -177,6 +177,18 @@ return {
 		stack = false,
 	},
 
+	['zip'] = {
+		label = 'zip',
+		weight = 100,
+		stack = false,
+	},
+
+	['clezip'] = {
+		label = 'canif',
+		weight = 100,
+		stack = false,
+	},
+
 	['clemenotte'] = {
 		label = 'Clé de menotte',
 		weight = 100,

@@ -250,6 +250,7 @@ Item('shop20', function(data, slot)
         end
 	end)
 end)
+
 Item('bandage', function(data, slot)
 	local maxHealth = GetEntityMaxHealth(cache.ped)
 	local health = GetEntityHealth(cache.ped)

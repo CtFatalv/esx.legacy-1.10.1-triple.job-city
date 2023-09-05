@@ -47,9 +47,9 @@ server.accounts.black_money = 0
 ---@diagnostic disable-next-line: duplicate-set-field
 function server.setPlayerData(player)
 	local groups = {
-        [player.job.name] = player.job.grade,
-        [player.job2.name] = player.job2.grade,
-        [player.job3.name] = player.job3.grade
+		[player.job.name] = player.job.grade,
+		[player.job2.name] = player.job2.grade,
+		[player.job3.name] = player.job3.grade
 	}
 
 	return {

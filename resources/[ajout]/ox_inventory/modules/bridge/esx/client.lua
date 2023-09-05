@@ -26,17 +26,17 @@ RegisterNetEvent('esx:onPlayerLogout', onLogout)
 
 AddEventHandler('esx:setPlayerData', function(key, value)
 	if not PlayerData.loaded or GetInvokingResource() ~= 'es_extended' then return end
-       
-    if key == 'job' then
-        key = 'groups'
-        value = { [value.name] = value.grade }
-    elseif key == 'job2' then
-        key = 'groups'
-        value = { [value.name] = value.grade }
-    elseif key == 'job3' then
-        key = 'groups'
-        value = { [value.name] = value.grade }
-    end
+
+	if key == 'job' then
+		key = 'groups'
+		value = { [value.name] = value.grade }
+	elseif key == 'job2' then
+		key = 'groups'
+		value = { [value.name] = value.grade }
+	elseif key == 'job3' then
+		key = 'groups'
+		value = { [value.name] = value.grade }
+	end
 
 	PlayerData[key] = value
 	OnPlayerData(key, value)
