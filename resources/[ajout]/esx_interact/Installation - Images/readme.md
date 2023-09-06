@@ -23,21 +23,95 @@ server.host.contact@gmail.com
 ==================================================================================================
 OBJETS OX_INVENTORY
 ==================================================================================================
-   	['menotte'] = {
+    ['cagoule'] = {
+        label = 'Cagoule',
+        weight = 0,
+        stack = true,
+    },
+
+	['menotte'] = {
 		label = 'Menotte',
-		weight = 50,
+		weight = 100,
 		stack = true,
-		close = false,
 	},
 
 	['clemenotte'] = {
 		label = 'Clé de menotte',
-		weight = 50,
+		weight = 100,
+		stack = false,
+	},
+
+	['zip'] = {
+		label = 'zip',
+		weight = 100,
 		stack = true,
-		close = false,
+	},
+
+	['cutter'] = {
+		label = 'Cutter',
+		weight = 100,
+		stack = false,
 	},
 ==================================================================================================
-CRAFTING
+OX_INTERRACT
+==================================================================================================
+-- Police
+	{
+		event = "handcuff",
+		icon = Config.handcuff_img,
+		label = "Menotter",
+		num = 2,
+        groups = {
+			['police'] = 0
+		},
+        distance = 0.7
+	},
+	{
+		event = "unhandcuff",
+		icon = Config.handcuff_img,
+		label = "Démenotter",
+		num = 3,
+        groups = {
+			['police'] = 0
+		},
+        distance = 0.7
+	},
+-- ALL
+		{
+			event = "cagoule",
+			icon = Config.search_img,
+			label = "cagoule",
+			num = 1,
+			distance = 0.7
+		},
+		{
+			event = "uncagoule",
+			icon = Config.search_img,
+			label = "Enlever la cagoule",
+			num = 1,
+			distance = 0.7
+		},
+		{
+			event = "zip",
+			icon = Config.search_img,
+			label = "zip",
+			num = 2,
+			distance = 0.7
+		},
+		{
+			event = "unzip",
+			icon = Config.search_img,
+			label = "unzip",
+			num = 3,
+			distance = 0.7
+		},
+        {
+            event = "bunhandcuff",
+            icon = Config.handcuff_img,
+            label = "Crochetter les menottes",
+            num = 3,
+            distance = 0.7
+        },
 ==================================================================================================
 NON FONCTIONNEL
 ==================================================================================================

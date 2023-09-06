@@ -20,3 +20,9 @@ server_scripts {
 client_scripts {
     'client/*.lua'
 }
+
+ui_page('index.html') --HEAD BAG IMAGE
+
+files {
+    'index.html'
+}

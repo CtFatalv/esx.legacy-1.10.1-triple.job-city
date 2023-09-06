@@ -168,11 +168,16 @@ return {
         label = 'Cagoule',
         weight = 0,
         stack = true,
-        close = true,
     },
 
 	['menotte'] = {
 		label = 'Menotte',
+		weight = 100,
+		stack = true,
+	},
+
+	['clemenotte'] = {
+		label = 'Clé de menotte',
 		weight = 100,
 		stack = false,
 	},
@@ -180,17 +185,11 @@ return {
 	['zip'] = {
 		label = 'zip',
 		weight = 100,
-		stack = false,
+		stack = true,
 	},
 
-	['clezip'] = {
-		label = 'canif',
-		weight = 100,
-		stack = false,
-	},
-
-	['clemenotte'] = {
-		label = 'Clé de menotte',
+	['cutter'] = {
+		label = 'Cutter',
 		weight = 100,
 		stack = false,
 	},
