@@ -1,3 +1,5 @@
+ESX = exports["es_extended"]:getSharedObject()
+
 if not lib then return end
 
 local Items = require 'modules.items.shared' --[[@as table<string, OxClientItem>]]
