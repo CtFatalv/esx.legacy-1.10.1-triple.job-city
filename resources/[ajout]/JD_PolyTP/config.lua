@@ -60,5 +60,19 @@ Config.TPZones = {
         destination = 'lux_outside',
         ShellWeatherSync = false,
     },
-    
+    ['labo_weedout'] = {
+        label = "Interieur Labo Weed",
+        icon = 'fas fa-square-caret-up',
+        pos = vector4(1066.40, -3183.39, -40.16, 277.00),
+        destination = 'labo_weedin',
+        ShellWeatherSync = false,
+    },
+    ['labo_weedin'] = {
+        label = "Exterieur Labo Weed",
+        icon = 'fas fa-square-caret-down',
+        pos = vector4(996.37, -1486.78, 30.51, 88.75),
+        destination = 'labo_weedout',
+        ShellWeatherSync = false,
+    },
+
 }
