@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 14 juil. 2023 à 22:51
--- Version du serveur : 10.11.4-MariaDB-1:10.11.4+maria~ubu2204
--- Version de PHP : 8.1.20
+-- Généré le : sam. 16 sep. 2023 à 10:22
+-- Version du serveur : 10.11.5-MariaDB-1:10.11.5+maria~ubu2204
+-- Version de PHP : 8.1.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -726,6 +726,22 @@ CREATE TABLE `player_outfit_codes` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `rcannabis`
+--
+
+CREATE TABLE `rcannabis` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `stage` int(3) UNSIGNED NOT NULL DEFAULT 1,
+  `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `x` float NOT NULL,
+  `y` float NOT NULL,
+  `z` float NOT NULL,
+  `soil` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `society_moneywash`
 --
 
@@ -1264,6 +1280,13 @@ ALTER TABLE `player_outfit_codes`
   ADD KEY `FK_player_outfit_codes_player_outfits` (`outfitid`);
 
 --
+-- Index pour la table `rcannabis`
+--
+ALTER TABLE `rcannabis`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `stage` (`stage`,`time`);
+
+--
 -- Index pour la table `society_moneywash`
 --
 ALTER TABLE `society_moneywash`
@@ -1389,6 +1412,12 @@ ALTER TABLE `player_outfits`
 --
 ALTER TABLE `player_outfit_codes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `rcannabis`
+--
+ALTER TABLE `rcannabis`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `society_moneywash`
