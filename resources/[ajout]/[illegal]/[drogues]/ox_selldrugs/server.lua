@@ -13,7 +13,7 @@ RegisterServerEvent('selldrugspay')
 AddEventHandler('selldrugspay', function(drugToSell)
     xPlayer = ESX.GetPlayerFromId(source)
     local itemamt = xPlayer.getInventoryItem('pochon_cannabis').count
-    local itemamt2 = xPlayer.getInventoryItem('coke_pooch').count
+    local itemamt2 = xPlayer.getInventoryItem('pochon_coke').count
     if itemamt >= 1 then
     xPlayer.removeInventoryItem('pochon_cannabis', 1)
         if Config.account == 'money' then
@@ -22,7 +22,7 @@ AddEventHandler('selldrugspay', function(drugToSell)
             xPlayer.addAccountMoney(Config.account, drugToSell.price)
         end          
     elseif itemamt2 >= 1 then
-        xPlayer.removeInventoryItem('coke_pooch', 1)
+        xPlayer.removeInventoryItem('pochon_coke', 1)
         if Config.account == 'money' then
             xPlayer.addMoney(drugToSell.price)
         else

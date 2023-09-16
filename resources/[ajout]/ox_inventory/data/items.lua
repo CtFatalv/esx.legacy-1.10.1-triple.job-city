@@ -223,6 +223,12 @@ return {
 		weight = 10,
 	},
 
+	['pochon_coke'] = {
+		label = 'Pochon de Cocaïne',
+		stack = true,
+		weight = 10,
+	},
+
 	['thermal_charge'] = {
 		label = 'Charge Thermique',
 		stack = true,
