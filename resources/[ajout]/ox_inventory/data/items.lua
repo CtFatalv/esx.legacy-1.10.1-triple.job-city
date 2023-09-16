@@ -98,8 +98,13 @@ return {
 		weight = 160,
 	},
 
+	['phone_crypter'] = {
+		label = 'Téléphone Crypté',
+		weight = 190,
+	},
+
 	['phone'] = {
-		label = 'Phone',
+		label = 'Téléphone',
 		weight = 190,
 		stack = false,
 		consume = 0,
@@ -123,7 +128,7 @@ return {
 	},
 
 	['mustard'] = {
-		label = 'Mustard',
+		label = 'Moutarde',
 		weight = 500,
 		client = {
 			status = { hunger = 25000, thirst = 25000 },
@@ -135,7 +140,7 @@ return {
 	},
 
 	['water'] = {
-		label = 'Water',
+		label = 'Bouteille d\'eau',
 		weight = 500,
 		client = {
 			status = { thirst = 200000 },
@@ -200,38 +205,20 @@ return {
 		weight = 10,
 	},
 
-	['canabis'] = {
-		label = 'Canabis',
+	['fertilisant'] = {
+		label = 'Fertilisant',
 		stack = true,
 		weight = 10,
 	},
 
-	['poche_canabis'] = {
+	['tete_canabis'] = {
+		label = 'Tête de Canabis',
+		stack = true,
+		weight = 10,
+	},
+
+	['pochon_canabis'] = {
 		label = 'Pochon de Canabis',
-		stack = true,
-		weight = 10,
-	},
-
-	['coke'] = {
-		label = 'Coke',
-		stack = true,
-		weight = 10,
-	},
-
-	['coke_pooch'] = {
-		label = 'Pochon de coke',
-		stack = true,
-		weight = 10,
-	},
-
-	['meth'] = {
-		label = 'Meth',
-		stack = true,
-		weight = 10,
-	},
-
-	['meth_pooch'] = {
-		label = 'Pochon de meth',
 		stack = true,
 		weight = 10,
 	},
@@ -260,13 +247,13 @@ return {
 		weight = 10,
 	},
 
-	['id_card'] = {
+	['card_id'] = {
 		label = 'Carte ID',
 		stack = true,
 		weight = 10,
 	},
 
-	['id_card2'] = {
+	['card_id2'] = {
 		label = 'Carte ID 2',
 		stack = true,
 		weight = 10,
