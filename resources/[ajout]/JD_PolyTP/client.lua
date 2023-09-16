@@ -12,7 +12,7 @@ Citizen.CreateThread(function()
 						{
 							event = "JD_PolyTP:TPLocation",
 							icon = v.icon,
-							label = "Go To".." "..Config.TPZones[v.destination].label.."",
+							label = "".." "..Config.TPZones[v.destination].label.."",
 							tp = v.destination,
 							destLabel = Config.TPZones[v.destination].label,
 							weatherSync = v.ShellWeatherSync,
