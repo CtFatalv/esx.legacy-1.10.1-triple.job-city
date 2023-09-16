@@ -195,7 +195,8 @@ AddEventHandler('selldrugsfindClient', next_ped)
 
 RegisterNetEvent('selldrugsnotifyPolice')
 AddEventHandler('selldrugsnotifyPolice', function(coords)
-	if PlayerData.job ~= nil and PlayerData.job.name == 'police' then
+    local player = ESX.GetPlayerData()
+    if player.job.name == "police" then
 		street = GetStreetNameAtCoord(coords.x, coords.y, coords.z)
 		street2 = GetStreetNameFromHashKey(street)
 --		ESX.ShowAdvancedNotification(Config.notify.police_notify_title, Config.notify.police_notify_subtitle, street2, "CHAR_CALL911", 1)
