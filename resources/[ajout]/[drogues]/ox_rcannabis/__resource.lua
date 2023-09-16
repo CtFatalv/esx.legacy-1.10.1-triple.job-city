@@ -1,5 +1,4 @@
 resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
-description 'ESX Rcanabis by DemmyDemon'
 
 dependencies {'es_extended','mysql-async'}
 
@@ -14,9 +13,9 @@ shared_scripts {
 }
 client_scripts {
     'lib/debug.lua',
-    'cl_rcanabis.lua',
+    'cl_rcannabis.lua',
 }
 server_scripts {
     '@mysql-async/lib/MySQL.lua',
-    'sv_rcanabis.lua',
+    'sv_rcannabis.lua',
 }

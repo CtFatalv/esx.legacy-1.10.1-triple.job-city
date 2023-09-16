@@ -11,9 +11,9 @@ Config = {
     ScenarioTime = 3000,  -- How long should the scenario/animations run?
     MaxGroundAngle = 0.6, -- How tilted can the ground be and still hold plants?
     Items = { -- What items are used?
-        Seed = 'graine_canabis',     -- Used to plant the weed
+        Seed = 'graine_cannabis',     -- Used to plant the weed
         Tend = nil,             -- Optional item to progress growth cycle
-        Product = 'tete_canabis', -- What item is given when you harvest?
+        Product = 'tete_cannabis', -- What item is given when you harvest?
     },
     Scenario = {
         Plant = 'WORLD_HUMAN_GARDENER_PLANT',

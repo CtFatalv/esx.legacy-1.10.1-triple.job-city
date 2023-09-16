@@ -199,8 +199,8 @@ return {
 		stack = false,
 	},
 
-	['graine_canabis'] = {
-		label = 'Graine de canabis',
+	['graine_cannabis'] = {
+		label = 'Graine de cannabis',
 		stack = true,
 		weight = 10,
 	},
@@ -211,14 +211,14 @@ return {
 		weight = 10,
 	},
 
-	['tete_canabis'] = {
-		label = 'Tête de Canabis',
+	['tete_cannabis'] = {
+		label = 'Tête de Cannabis',
 		stack = true,
 		weight = 10,
 	},
 
-	['pochon_canabis'] = {
-		label = 'Pochon de Canabis',
+	['pochon_cannabis'] = {
+		label = 'Pochon de Cannabis',
 		stack = true,
 		weight = 10,
 	},

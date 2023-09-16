@@ -13,18 +13,18 @@ local registerStrings = {
 }
 
 for i,entry in ipairs(registerStrings) do
-    AddTextEntry('rcanabis_'..entry, _U(entry))
+    AddTextEntry('rcannabis_'..entry, _U(entry))
 end
 
 function interactHelp(stage,action)
-    BeginTextCommandDisplayHelp('rcanabis_status_active')
+    BeginTextCommandDisplayHelp('rcannabis_status_active')
     AddTextComponentInteger(stage)
     AddTextComponentInteger(#Growth)
     AddTextComponentSubstringPlayerName(action)
     EndTextCommandDisplayHelp(0, false, false, 1)
 end
 function passiveHelp(stage,status)
-    BeginTextCommandDisplayHelp('rcanabis_status_passive')
+    BeginTextCommandDisplayHelp('rcannabis_status_passive')
     AddTextComponentInteger(stage)
     AddTextComponentInteger(#Growth)
     AddTextComponentSubstringPlayerName(status)
@@ -50,7 +50,7 @@ function makeToast(subject,message)
         icon, -- texture name
         true, -- fade
         0, -- icon type
-        'Rcanabis', -- Sender
+        'Rcannabis', -- Sender
         subject
     )
     --EndTextCommandThefeedPostTicker(
@@ -61,8 +61,8 @@ function makeToast(subject,message)
     SetStreamedTextureDictAsNoLongerNeeded(icon)
 end
 
-RegisterNetEvent('ox_rcanabis:make_toast')
-AddEventHandler ('ox_rcanabis:make_toast', function(subject,message)
+RegisterNetEvent('ox_rcannabis:make_toast')
+AddEventHandler ('ox_rcannabis:make_toast', function(subject,message)
     makeToast(subject, message)
 end)
 
@@ -209,8 +209,8 @@ function RunScenario(name, facing)
     inScenario = true
 end
 
-RegisterNetEvent('ox_rcanabis:do')
-AddEventHandler ('ox_rcanabis:do', function(scenarioName, location)
+RegisterNetEvent('ox_rcannabis:do')
+AddEventHandler ('ox_rcannabis:do', function(scenarioName, location)
     if Config.Scenario[scenarioName] then
         Citizen.CreateThread(function()
             local begin = GetGameTimer()
@@ -228,11 +228,11 @@ AddEventHandler ('ox_rcanabis:do', function(scenarioName, location)
     end
 end)
 
-RegisterNetEvent('ox_rcanabis:attempt_plant')
-AddEventHandler ('ox_rcanabis:attempt_plant', function()
+RegisterNetEvent('ox_rcannabis:attempt_plant')
+AddEventHandler ('ox_rcannabis:attempt_plant', function()
     local plantable, message, location, _, soil = getPlantingLocation()
     if plantable then
-        TriggerServerEvent('ox_rcanabis:success_plant', location, soil)
+        TriggerServerEvent('ox_rcannabis:success_plant', location, soil)
         lastAction = GetGameTimer()
     else
 		ESX.ShowNotification(_U(message), "error", 7000)
@@ -357,10 +357,10 @@ local drawDistance = Config.Distance.Draw
                     if (stage.label) == 'growth_tend' then
                         local water = exports.ox_inventory:Search('count', 'water')
                         if  water >= 1 then
-                            TriggerServerEvent('ox_rcanabis:removewater')
+                            TriggerServerEvent('ox_rcannabis:removewater')
                             lock = true
                             lastAction = now
-                            TriggerServerEvent('ox_rcanabis:frob', closestPlant.id, myLocation)
+                            TriggerServerEvent('ox_rcannabis:frob', closestPlant.id, myLocation)
                             Citizen.Wait(15000)
                             ESX.ShowNotification("~o~Revenez dans ~y~2h ~o~pour y mettre le ~y~fertilisant!", "success", 7000)
                             Citizen.Wait(5000)
@@ -371,10 +371,10 @@ local drawDistance = Config.Distance.Draw
                     elseif (stage.label) == 'growth_tend2' then
                         local fertilisant = exports.ox_inventory:Search('count', 'fertilisant')
                         if  fertilisant >= 1 then
-                            TriggerServerEvent('ox_rcanabis:removefertilisant')
+                            TriggerServerEvent('ox_rcannabis:removefertilisant')
                             lock = true
                             lastAction = now
-                            TriggerServerEvent('ox_rcanabis:frob', closestPlant.id, myLocation)
+                            TriggerServerEvent('ox_rcannabis:frob', closestPlant.id, myLocation)
                             Citizen.Wait(15000)
                             ESX.ShowNotification("~o~Revenez dans ~y~5h ~o~pour la ~y~récolter!", "success", 7000)
                             Citizen.Wait(5000)
@@ -387,7 +387,7 @@ local drawDistance = Config.Distance.Draw
                         if  secateur >= 1 then
                             lock = true
                             lastAction = now
-                            TriggerServerEvent('ox_rcanabis:frob', closestPlant.id, myLocation)
+                            TriggerServerEvent('ox_rcannabis:frob', closestPlant.id, myLocation)
                             lock = false
                         else
                             ESX.ShowNotification("Vous n'avez pas de ~r~secateur~s~!", "error", 3000)
@@ -445,7 +445,7 @@ local drawDistance = Config.Distance.Draw
                     lastAction = now
                     table.remove(activePlants, closestIndex)
                     DeleteObject(closestPlant.object)
-                    TriggerServerEvent('ox_rcanabis:remove', closestPlant.id, myLocation)
+                    TriggerServerEvent('ox_rcannabis:remove', closestPlant.id, myLocation)
                     Citizen.Wait(20000)
                     lock = false
                 end
@@ -474,8 +474,8 @@ AddEventHandler('onResourceStop', function(resourceName)
     end
 end)
 
-RegisterNetEvent('ox_rcanabis:toggle_debug')
-AddEventHandler ('ox_rcanabis:toggle_debug', function()
+RegisterNetEvent('ox_rcannabis:toggle_debug')
+AddEventHandler ('ox_rcannabis:toggle_debug', function()
     if not debug.active then
         debug.active = true
     else
@@ -483,8 +483,8 @@ AddEventHandler ('ox_rcanabis:toggle_debug', function()
     end
 end)
 
-RegisterNetEvent('ox_rcanabis:pyromaniac')
-AddEventHandler ('ox_rcanabis:pyromaniac',function(location)
+RegisterNetEvent('ox_rcannabis:pyromaniac')
+AddEventHandler ('ox_rcannabis:pyromaniac',function(location)
     if Config.Burn.Enabled then
         local myLocation = GetEntityCoords(PlayerPedId())
         if not location then
@@ -536,8 +536,8 @@ Citizen.CreateThread(function()
     end
 end)
 
-RegisterNetEvent('ox_rcanabis:groundmat')
-AddEventHandler ('ox_rcanabis:groundmat', function()
+RegisterNetEvent('ox_rcannabis:groundmat')
+AddEventHandler ('ox_rcannabis:groundmat', function()
     local plantable, message, where, normal, material = getPlantingLocation(true)
     TriggerEvent("chat:addMessage", {args={'Ground material', material}})
 
@@ -549,19 +549,19 @@ AddEventHandler ('ox_rcanabis:groundmat', function()
     end
 end)
 
-RegisterNetEvent('ox_rcanabis:deletezone')
-AddEventHandler ('ox_rcanabis:deletezone', function()
+RegisterNetEvent('ox_rcannabis:deletezone')
+AddEventHandler ('ox_rcannabis:deletezone', function()
 	local playerpos = GetEntityCoords(PlayerPedId())
 	ClearArea(playerpos.x, playerpos.y, playerpos.z, 2.0, true, false, false, false)
 end)
 
-RegisterNetEvent('ox_rcanabis:test_forest')
-AddEventHandler ('ox_rcanabis:test_forest',function(count, randomStage)
+RegisterNetEvent('ox_rcannabis:test_forest')
+AddEventHandler ('ox_rcannabis:test_forest',function(count, randomStage)
     local origin = GetEntityCoords(PlayerPedId())
     
-    TriggerEvent("chat:addMessage", {args={'Rcanabis','Target forest size: '..count}})
+    TriggerEvent("chat:addMessage", {args={'Rcannabis','Target forest size: '..count}})
     local column = math.ceil(math.sqrt(count))
-    TriggerEvent("chat:addMessage", {args={'Rcanabis','Column size: '..column}})
+    TriggerEvent("chat:addMessage", {args={'Rcannabis','Column size: '..column}})
 
     local offset = (column * Config.Distance.Space)/2
     offset = vector3(-offset, -offset, 5)
@@ -584,8 +584,8 @@ AddEventHandler ('ox_rcanabis:test_forest',function(count, randomStage)
             cursor = cursor + vector3(Config.Distance.Space, -(Config.Distance.Space * column), 0)
         end
     end
-    TriggerEvent("chat:addMessage", {args={'Rcanabis', 'Actual viable locations: '..#forest}})
-    TriggerServerEvent('ox_rcanabis:test_forest', forest)
+    TriggerEvent("chat:addMessage", {args={'Rcannabis', 'Actual viable locations: '..#forest}})
+    TriggerServerEvent('ox_rcannabis:test_forest', forest)
 end)
 
 
@@ -626,7 +626,7 @@ exports.ox_target:addBoxZone({
     options = {
         {
             name = 'Traiter la weed',
-            event = 'ox_rcanabis:table1',
+            event = 'ox_rcannabis:table1',
             icon = 'fas fa-seedling',
             label = 'Traiter la weed',
 			distance = 1.5,
@@ -642,7 +642,7 @@ exports.ox_target:addBoxZone({
     options = {
         {
             name = 'Traiter la weed',
-            event = 'ox_rcanabis:table2',
+            event = 'ox_rcannabis:table2',
             icon = 'fas fa-seedling',
             label = 'Traiter la weed',
 			distance = 1.5,
@@ -650,9 +650,9 @@ exports.ox_target:addBoxZone({
     }
 })
 
-AddEventHandler('ox_rcanabis:table1', function()
+AddEventHandler('ox_rcannabis:table1', function()
 	local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()    
-    local teteweed = exports.ox_inventory:Search('count', 'tete_canabis')
+    local teteweed = exports.ox_inventory:Search('count', 'tete_cannabis')
     if teteweed >= 1 then
         if not startteteweed then
             startteteweed = true
@@ -679,7 +679,7 @@ AddEventHandler('ox_rcanabis:table1', function()
             Wait(1000)
             DeleteEntity(props)
             FreezeEntityPosition(PlayerPedId(), false)
-            TriggerServerEvent('ox_rcanabis:removegive')
+            TriggerServerEvent('ox_rcannabis:removegive')
             startteteweed = false
 			lock = false
         else   
@@ -707,7 +707,7 @@ AddEventHandler('ox_rcanabis:table1', function()
                 Wait(1000)
                 DeleteEntity(props)
                 FreezeEntityPosition(PlayerPedId(), false)
-                TriggerServerEvent('ox_rcanabis:removegive')
+                TriggerServerEvent('ox_rcannabis:removegive')
                 startteteweed = false
 				lock = false
             else
@@ -718,13 +718,13 @@ AddEventHandler('ox_rcanabis:table1', function()
         ESX.ShowNotification("~r~Vous êtes déjà dans une action!", "error", 3000)
     end
     else
-        ESX.ShowNotification("~r~Vous n'avez pas assez de tête de canabis!", "error", 3000)
+        ESX.ShowNotification("~r~Vous n'avez pas assez de tête de cannabis!", "error", 3000)
     end
 end)
 
-AddEventHandler('ox_rcanabis:table2', function()
+AddEventHandler('ox_rcannabis:table2', function()
 	local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()    
-    local teteweed = exports.ox_inventory:Search('count', 'tete_canabis')
+    local teteweed = exports.ox_inventory:Search('count', 'tete_cannabis')
     if teteweed >= 1 then
         if not startteteweed then
             startteteweed = true
@@ -752,7 +752,7 @@ AddEventHandler('ox_rcanabis:table2', function()
             Wait(1000)
             DeleteEntity(props)
             FreezeEntityPosition(PlayerPedId(), false)
-            TriggerServerEvent('ox_rcanabis:removegive')
+            TriggerServerEvent('ox_rcannabis:removegive')
             startteteweed = false
             lock = false
         else   
@@ -780,7 +780,7 @@ AddEventHandler('ox_rcanabis:table2', function()
                 Wait(1000)
                 DeleteEntity(props)
                 FreezeEntityPosition(PlayerPedId(), false)
-                TriggerServerEvent('ox_rcanabis:removegive')
+                TriggerServerEvent('ox_rcannabis:removegive')
                 startteteweed = false
 				lock = false
             else
@@ -791,6 +791,6 @@ AddEventHandler('ox_rcanabis:table2', function()
         ESX.ShowNotification("~r~Vous êtes déjà dans une action!", "error", 3000)
     end
     else
-        ESX.ShowNotification("~r~Vous n'avez pas assez de tête de canabis!", "error", 3000)
+        ESX.ShowNotification("~r~Vous n'avez pas assez de tête de cannabis!", "error", 3000)
     end
 end)

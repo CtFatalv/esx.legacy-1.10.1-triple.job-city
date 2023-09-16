@@ -87,12 +87,12 @@ function GiveItem(who, what, count)
 end
 
 function makeToast(target, subject, message)
-    TriggerClientEvent('ox_rcanabis:make_toast', target, subject, message)
+    TriggerClientEvent('ox_rcannabis:make_toast', target, subject, message)
 end
 function inChat(target, message)
     if target == 0 then
     else
-        TriggerClientEvent('chat:addMessage',target,{args={'Rcanabis', message}})
+        TriggerClientEvent('chat:addMessage',target,{args={'Rcannabis', message}})
     end
 end
 
@@ -110,11 +110,11 @@ end
 
 function doScenario(who, what, where)
     verbose('Telling', who,'to',what,'at',where)
-    TriggerClientEvent('ox_rcanabis:do', who, what, where)
+    TriggerClientEvent('ox_rcannabis:do', who, what, where)
 end
 
-RegisterNetEvent('ox_rcanabis:success_plant')
-AddEventHandler ('ox_rcanabis:success_plant', function(location, soil)
+RegisterNetEvent('ox_rcannabis:success_plant')
+AddEventHandler ('ox_rcannabis:success_plant', function(location, soil)
     local src = source
     if oneSyncEnabled and false then
         local ped = GetPlayerPed(src)
@@ -149,12 +149,12 @@ AddEventHandler ('ox_rcanabis:success_plant', function(location, soil)
     end
 end)
 
-RegisterNetEvent('ox_rcanabis:test_forest')
-AddEventHandler ('ox_rcanabis:test_forest',function(forest)
+RegisterNetEvent('ox_rcannabis:test_forest')
+AddEventHandler ('ox_rcannabis:test_forest',function(forest)
     local src = source
 
 
-    if IsPlayerAceAllowed(src, 'command.rcanabis') then
+    if IsPlayerAceAllowed(src, 'command.rcannabis') then
 
         local soil
         for candidate, quality in pairs(Config.Soil) do
@@ -184,12 +184,12 @@ function keyCount(tbl)
     return count
 end
 
-ESX.RegisterUsableItem('graine_canabis', function(source)
+ESX.RegisterUsableItem('graine_cannabis', function(source)
     local now = os.time()
     local last = lastPlant[source] or 0
     if now > last + (Config.ActionTime/1000) then
         if HasItem(source, Config.Items.Seed) then
-            TriggerClientEvent('ox_rcanabis:attempt_plant', source)
+            TriggerClientEvent('ox_rcannabis:attempt_plant', source)
             lastPlant[source] = now
         else
             TriggerClientEvent('esx:showNotification', source, '~r~Vous n\'avez pas de graines', 'error', 3000)
@@ -265,7 +265,7 @@ local commands = {
     debug = function(source, args)
         if source == 0 then
         else
-            TriggerClientEvent('ox_rcanabis:toggle_debug', source)
+            TriggerClientEvent('ox_rcannabis:toggle_debug', source)
         end
     end,
     stage = function(source, args)
@@ -301,7 +301,7 @@ local commands = {
             local randomStage = false
             if args[2] then randomStage = true end
 
-            TriggerClientEvent('ox_rcanabis:test_forest', source, count, randomStage)
+            TriggerClientEvent('ox_rcannabis:test_forest', source, count, randomStage)
 
         end
     end,
@@ -321,35 +321,35 @@ local commands = {
     groundmat = function(source, args)
         if source == 0 then
         else
-            TriggerClientEvent('ox_rcanabis:groundmat', source)
+            TriggerClientEvent('ox_rcannabis:groundmat', source)
         end
     end,
     pyro = function(source, args)
         if source == 0 then
         else
-            TriggerClientEvent('ox_rcanabis:pyromaniac', source)
+            TriggerClientEvent('ox_rcannabis:pyromaniac', source)
         end
     end,
 }
 
-RegisterNetEvent('ox_rcanabis:removewater')
-AddEventHandler ('ox_rcanabis:removewater',function()
+RegisterNetEvent('ox_rcannabis:removewater')
+AddEventHandler ('ox_rcannabis:removewater',function()
 	local src = source
     local xPlayer = ESX.GetPlayerFromId(src)
 	xPlayer.removeInventoryItem("water", 1)
 end)
 
-RegisterNetEvent('ox_rcanabis:removefertilisant')
-AddEventHandler ('ox_rcanabis:removefertilisant',function()
+RegisterNetEvent('ox_rcannabis:removefertilisant')
+AddEventHandler ('ox_rcannabis:removefertilisant',function()
 	local src = source
     local xPlayer = ESX.GetPlayerFromId(src)
 	xPlayer.removeInventoryItem("fertilisant", 1)
 end)
 
-RegisterNetEvent('ox_rcanabis:removegive')
-AddEventHandler('ox_rcanabis:removegive', function()
+RegisterNetEvent('ox_rcannabis:removegive')
+AddEventHandler('ox_rcannabis:removegive', function()
     _source = source
     xPlayer = ESX.GetPlayerFromId(_source)
-	xPlayer.removeInventoryItem('tete_canabis', 1)
-	xPlayer.addInventoryItem('pochon_canabis', 2)
+	xPlayer.removeInventoryItem('tete_cannabis', 1)
+	xPlayer.addInventoryItem('pochon_cannabis', 2)
 end)

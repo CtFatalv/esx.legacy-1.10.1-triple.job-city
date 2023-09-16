@@ -3,7 +3,7 @@ local cropstateMethods = {
     plant = function(instance, location, soil, stage)
         if onServer then
             stage = stage or 1
-            MySQL.Async.insert("INSERT INTO `rcanabis` (`x`, `y`, `z`, `soil`, `stage`) VALUES (@x, @y, @z, @soil, @stage);",
+            MySQL.Async.insert("INSERT INTO `rcannabis` (`x`, `y`, `z`, `soil`, `stage`) VALUES (@x, @y, @z, @soil, @stage);",
             {
                 ['@x'] = location.x,
                 ['@y'] = location.y,
@@ -13,7 +13,7 @@ local cropstateMethods = {
             },
             function(id)
                 instance:import(id, location, stage, os.time(), soil)
-                TriggerClientEvent('ox_rcanabis:planted',-1, id, location, stage)
+                TriggerClientEvent('ox_rcannabis:planted',-1, id, location, stage)
                 verbose('Plant',id,'was planted.')
             end)
         else
@@ -23,7 +23,7 @@ local cropstateMethods = {
     load = function(instance, callback)
         if onServer then
             verbose('Loading...')
-            MySQL.Async.fetchAll("SELECT `id`, `stage`, UNIX_TIMESTAMP(`time`) AS `time`, `x`, `y`, `z`, `soil` FROM `rcanabis`;", 
+            MySQL.Async.fetchAll("SELECT `id`, `stage`, UNIX_TIMESTAMP(`time`) AS `time`, `x`, `y`, `z`, `soil` FROM `rcannabis`;", 
             {},
             function(rows)
                 Citizen.CreateThread(function()
@@ -45,7 +45,7 @@ local cropstateMethods = {
     import = function(instance, id, location, stage, time, soil)
         local success, object = instance.octree:insert(location, 0.01, {id=id, stage=stage, time=time, soil=soil})
         if not success then
-            Citizen.Trace(string.format("Rcanabis failed to import plant with ID %i into octree\n", id))
+            Citizen.Trace(string.format("Rcannabis failed to import plant with ID %i into octree\n", id))
         end
         instance.index[id] = object
     end,
@@ -54,12 +54,12 @@ local cropstateMethods = {
         plant.data.stage = stage
         if onServer then
             plant.data.time = os.time()
-            MySQL.Async.execute("UPDATE `rcanabis` SET `stage` = @stage WHERE `id` = @id LIMIT 1;",
+            MySQL.Async.execute("UPDATE `rcannabis` SET `stage` = @stage WHERE `id` = @id LIMIT 1;",
             {
                 ['@id'] = id,
                 ['@stage'] = stage,
             }, function(_)
-                TriggerClientEvent('ox_rcanabis:update', -1, id, stage)
+                TriggerClientEvent('ox_rcannabis:update', -1, id, stage)
                 verbose('Set plant',id,'to stage',stage)
             end)
         elseif plant.data.object then
@@ -83,12 +83,12 @@ local cropstateMethods = {
         end
         instance.index[id] = nil
         if onServer then
-            MySQL.Async.execute("DELETE FROM `rcanabis` WHERE `id` = @id LIMIT 1;",
+            MySQL.Async.execute("DELETE FROM `rcannabis` WHERE `id` = @id LIMIT 1;",
             { ['@id'] = id },
             function()
-                TriggerClientEvent('ox_rcanabis:removePlant', -1, id)
+                TriggerClientEvent('ox_rcannabis:removePlant', -1, id)
                 if withPyro then
-                    TriggerClientEvent('ox_rcanabis:pyromaniac', -1, location)
+                    TriggerClientEvent('ox_rcannabis:pyromaniac', -1, location)
                 end
                 verbose('Removed plant',id)
             end)
@@ -114,9 +114,9 @@ local cropstateMethods = {
                     table.insert(forest, {id=id, location=plant.bounds.location, stage=plant.data.stage})
                 end
             end
-            TriggerClientEvent('ox_rcanabis:bulk_data', target, forest)
+            TriggerClientEvent('ox_rcannabis:bulk_data', target, forest)
         else
-            TriggerServerEvent('ox_rcanabis:request_data')
+            TriggerServerEvent('ox_rcannabis:request_data')
         end
     end,
 }
@@ -142,13 +142,13 @@ cropstate = {
 setmetatable(cropstate,cropstateMeta)
 
 if onServer then
-    RegisterNetEvent('ox_rcanabis:request_data')
-    AddEventHandler ('ox_rcanabis:request_data', function()
+    RegisterNetEvent('ox_rcannabis:request_data')
+    AddEventHandler ('ox_rcannabis:request_data', function()
         cropstate:bulkData(source)
     end)
     
-    RegisterNetEvent('ox_rcanabis:remove')
-    AddEventHandler ('ox_rcanabis:remove', function(plantID, nearLocation)
+    RegisterNetEvent('ox_rcannabis:remove')
+    AddEventHandler ('ox_rcannabis:remove', function(plantID, nearLocation)
         local src = source
         local plant = cropstate.index[plantID]
         if plant then
@@ -163,12 +163,12 @@ if onServer then
             end
         else
             Citizen.Trace(GetPlayerName(src)..' ('..src..') tried to remove plant '..plantID..': That plant does not exist!\n')
-            TriggerClientEvent('ox_rcanabis:remove', src, plantID)
+            TriggerClientEvent('ox_rcannabis:remove', src, plantID)
         end
     end)
 
-    RegisterNetEvent('ox_rcanabis:frob')
-    AddEventHandler ('ox_rcanabis:frob', function(plantID, nearLocation)
+    RegisterNetEvent('ox_rcannabis:frob')
+    AddEventHandler ('ox_rcannabis:frob', function(plantID, nearLocation)
         local src = source
         local plant = cropstate.index[plantID]
         if plant then
@@ -184,7 +184,7 @@ if onServer then
                         local seeds = math.random(Config.YieldSeed[1], Config.YieldSeed[2])
                         if GiveItem(src, Config.Items.Product, yield) then
                             cropstate:remove(plantID)
-							TriggerClientEvent('ox_rcanabis:deletezone', -1)
+							TriggerClientEvent('ox_rcannabis:deletezone', -1)
                             if seeds > 0 and GiveItem(src, Config.Items.Seed, seeds) then
                                -- makeToast(src, _U('interact_text'), _U('interact_harvested', yield, seeds))
                             else
@@ -217,26 +217,26 @@ if onServer then
     end)
 
 else
-    RegisterNetEvent('ox_rcanabis:bulk_data')
-    AddEventHandler ('ox_rcanabis:bulk_data', function(forest)
+    RegisterNetEvent('ox_rcannabis:bulk_data')
+    AddEventHandler ('ox_rcannabis:bulk_data', function(forest)
         for i, plant in ipairs(forest) do
             cropstate:import(plant.id, plant.location, plant.stage)
         end
         cropstate.loaded = true
     end)
 
-    RegisterNetEvent('ox_rcanabis:planted')
-    AddEventHandler ('ox_rcanabis:planted', function(id, location, stage)
+    RegisterNetEvent('ox_rcannabis:planted')
+    AddEventHandler ('ox_rcannabis:planted', function(id, location, stage)
         cropstate:import(id, location, stage)
     end)
     
-    RegisterNetEvent('ox_rcanabis:update')
-    AddEventHandler ('ox_rcanabis:update', function(plantID, stage)
+    RegisterNetEvent('ox_rcannabis:update')
+    AddEventHandler ('ox_rcannabis:update', function(plantID, stage)
         cropstate:update(plantID, stage)
     end)
 
-    RegisterNetEvent('ox_rcanabis:removePlant')
-    AddEventHandler ('ox_rcanabis:removePlant', function(plantID)
+    RegisterNetEvent('ox_rcannabis:removePlant')
+    AddEventHandler ('ox_rcannabis:removePlant', function(plantID)
         cropstate:remove(plantID)
     end)
 end

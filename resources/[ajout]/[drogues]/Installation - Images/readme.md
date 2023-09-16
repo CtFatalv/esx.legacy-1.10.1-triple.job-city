@@ -21,6 +21,26 @@ https://discord.gg/gdVc4V83pB
 - Mail:
 server.host.contact@gmail.com
 ==================================================================================================
+PHPMYADMIN -- SQL
+==================================================================================================
+CREATE TABLE `rcannabis` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `stage` int(3) UNSIGNED NOT NULL DEFAULT 1,
+  `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `x` float NOT NULL,
+  `y` float NOT NULL,
+  `z` float NOT NULL,
+  `soil` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `rcannabis`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `stage` (`stage`,`time`);
+
+ALTER TABLE `rcannabis`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
+==================================================================================================
 OBJETS OX_INVENTORY
 ==================================================================================================
 	['phone_crypter'] = {
@@ -28,8 +48,8 @@ OBJETS OX_INVENTORY
 		weight = 190,
 	},
 
-	['graine_canabis'] = {
-		label = 'Graine de canabis',
+	['graine_cannabis'] = {
+		label = 'Graine de cannabis',
 		stack = true,
 		weight = 10,
 	},
@@ -40,14 +60,14 @@ OBJETS OX_INVENTORY
 		weight = 10,
 	},
 
-	['tete_canabis'] = {
-		label = 'Tête de Canabis',
+	['tete_cannabis'] = {
+		label = 'Tête de Cannabis',
 		stack = true,
 		weight = 10,
 	},
 
-	['pochon_canabis'] = {
-		label = 'Pochon de Canabis',
+	['pochon_cannabis'] = {
+		label = 'Pochon de Cannabis',
 		stack = true,
 		weight = 10,
 	},
