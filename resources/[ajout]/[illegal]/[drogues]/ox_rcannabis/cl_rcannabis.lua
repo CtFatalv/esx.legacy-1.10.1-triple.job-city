@@ -727,7 +727,6 @@ AddEventHandler('ox_rcannabis:table2', function()
     local teteweed = exports.ox_inventory:Search('count', 'tete_cannabis')
     if teteweed >= 1 then
         if not startteteweed then
-            startteteweed = true
         if closestDistance == -1 then 
             lock = true
             RequestAnimDict("anim@amb@business@weed@weed_sorting_seated@") 
